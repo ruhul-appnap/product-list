@@ -14,15 +14,18 @@ function ProductCard({ product }: { product: Product }) {
     product.price * (product.discountPercentage / 100)
   );
   const priceWithDiscount = (product.price + discountAmount).toFixed(2);
+  const isDiscounted = discountAmount > 0;
 
   return (
     <div className="relative group bg-white rounded-lg hover:shadow-md transition-shadow px-1">
-      <div className="absolute top-2 left-[-3px] z-10 text-sm flex items-center shadow-sm rounded-l-md">
-        <div className="bg-tag text-white px-4 py-[2px]">
-          -৳ {discountAmount}
+      {isDiscounted && (
+        <div className="absolute top-2 left-[-3px] z-10 text-sm flex items-center shadow-sm rounded-l-md">
+          <div className="bg-tag text-white px-4 py-[2px]">
+            -৳ {discountAmount}
+          </div>
+          <TgaTailIcon />
         </div>
-        <TgaTailIcon />
-      </div>
+      )}
 
       <button className="absolute top-2 right-2 z-10 p-2 transition-colors hidden group-hover:block">
         <Heart className="w-7 h-7 text-white" />
@@ -77,9 +80,11 @@ function ProductCard({ product }: { product: Product }) {
           <span className="text-lg font-semibold text-[#1882FF]">
             ৳ {product.price}
           </span>
-          <span className="text-lg text-[#77818C] line-through">
-            ৳ {priceWithDiscount}
-          </span>
+          {isDiscounted && (
+            <span className="text-lg text-[#77818C] line-through">
+              ৳ {priceWithDiscount}
+            </span>
+          )}
         </div>
       </div>
     </div>
