@@ -1,6 +1,6 @@
 import { type ProductsResponse } from "@/types/product";
 
-const BASE_URL = "https://dummyjson.com";
+const BASE_URL = process.env.API_BASE_URL;
 
 export const productService = {
   async getAllProducts(options?: { limit?: number; skip?: number }) {
